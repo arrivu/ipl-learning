@@ -1,0 +1,32 @@
+<br>
+<div class="container" >
+  <div class="row" >
+    <div class="span6 offset3" >
+      <%= form_for @account, :html => { :class => 'form-horizontal' } do |f| %>
+      <div class="control-group">
+        <%= f.label :ac_name, "Account Name" , :class => 'control-label' %>
+        <div class="controls">
+          <%= f.text_field :ac_name, :class => 'text_field' %>
+        </div> <br>
+        <%= f.label :sub_domain_name, "Sub Domain Name" , :class => 'control-label' %>
+        <div class="controls">
+          <%= f.text_field :sub_domain_name, :class => 'text_field' %>
+        </div> <br>
+        <%= f.label :lms_account_id, "LMS Account ID" , :class => 'control-label' %>
+        <div class="controls">
+          <%= f.text_field :lms_account_id, :class => 'text_field' %>
+        </div> <br>
+        <%= f.label :is_active, "Active" , :class => 'control-label' %>
+        <div class="controls">
+          <%= f.check_box :is_active ,:checked => true%>
+        </div> <br>
+      </div>
+      <div class="form-actions">
+        <%= f.submit "Create Account", :class => 'btn btn-primary'  %>
+        <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+        topics_path, :class => 'btn' %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>

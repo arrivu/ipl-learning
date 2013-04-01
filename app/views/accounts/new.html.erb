@@ -10,19 +10,19 @@
 <li>
 <%= link_to "Manage Course Library", manage_courses_path %>
 </li>
-<li > <%= link_to "New Category",new_topic_path %> </li>
+<li> <%= link_to "New Category",new_topic_path %> </li>
 <li >
  <%= link_to "Manage Category", topics_path %>
  </li>
 
  <li><%= link_to "New Preview",new_preview_path %></li>
 <li><%= link_to "Manage Preview",previews_path %></li>
-<li ><%= link_to "New Account",new_account_path %></li>
+<li class="active"><%= link_to "New Account",new_account_path %></li>
  </ul>
  
-						<h3 align = "center">New Category</h3>
+						<h3 align = "center">New Account</h3>
 					
-<%- model_class = Account -%>
+<%- model_class = Topic -%>
 
 <%= render :partial => 'form' %>
 </div>

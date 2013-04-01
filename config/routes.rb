@@ -1,4 +1,5 @@
 Myapp::Application.routes.draw do
+  
   match '/rate' => 'rater#create', :as => 'rate'
 
 
@@ -20,6 +21,11 @@ Myapp::Application.routes.draw do
   resources :under_constructions
   resources :o_classes
   resources :previews
+  resources :accounts do
+    member do
+      get 'adduser'
+    end
+  end
   authenticated :user do
     root :to => 'screens#home'
   end

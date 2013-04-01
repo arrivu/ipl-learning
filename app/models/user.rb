@@ -40,7 +40,7 @@ class User < ActiveRecord::Base
   has_many :authentication, :dependent => :delete_all
 
   has_many :comments
-
+  belongs_to :account
   # has_one :teaching_staffs, dependent: :destroy
   # has_one :students, dependent: :destroy
 

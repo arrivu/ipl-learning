@@ -13,6 +13,15 @@
 
 ActiveRecord::Schema.define(:version => 20130314093035551) do
 
+  create_table "accounts", :force => true do |t|
+    t.string   "ac_name"
+    t.string   "sub_domain_name"
+    t.integer  "lms_account_id"
+    t.integer  "is_active"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
     t.string   "provider"
@@ -292,6 +301,7 @@ ActiveRecord::Schema.define(:version => 20130314093035551) do
     t.string   "attachment"
     t.string   "content_type"
     t.binary   "image_blob"
+    t.integer  "ac_id"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
