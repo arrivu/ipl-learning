@@ -14,3 +14,56 @@ capybara-*.html
 **.orig
 rerun.txt
 pickle-email-*.html
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+git config --global core.excludesfile ~/.gitignore_global
+# Ignore bundler config
+/.bundle
+# Ignore the default SQLite database.
+/db/*.sqlite3
+# Ignore all logfiles and tempfiles.
+/log/*.log
+/tmp
+# Ignore bundler config
+/.bundle
+# Ignore the default SQLite database.
+/db/*.sqlite3
+db/development.sqlite3
+
+# Ignore all logfiles and tempfiles.
+/log/*.log
+/tmp
+# Ignore other unneeded files.
+doc/
+*.swp
+*~
+.project
+.DS_Store
+.idea
+config/settings.local.yml
+config/settings/*.local.yml
+config/environments/*.local.yml
+
+log/development.log
+
+>>>>>>> bf7a4c1a6e9f13bda7df1b95900140521e5802ea

@@ -1,0 +1,69 @@
+<br>
+<div class="row">
+	<div class="span12 offset3">
+		<ul class="nav nav-pills .pull-left">
+			<li >
+				<%= link_to "Users", users_path %>
+			</li><li class="active">
+			<%= link_to "New Course Library", new_course_path %>
+		</li>
+		<li>
+			<%= link_to "Manage Course Library", manage_courses_path %>
+		</li>
+<li >
+		<%= link_to "New Category",new_topic_path %></li>
+		
+		<li>
+			<%= link_to "Manage Category", topics_path %>
+		</li>
+		<li><%= link_to "New Preview",new_preview_path %></li>
+		<li><%= link_to "Manage Preview",previews_path %></li>
+	</ul>
+	<% provide(:title, 'Create Course') %>
+	<div class="row">
+		<div class="span10 ">
+			<div class = "hero-unit">
+				<table class="table table-hover ">
+					<tr>
+						<h3 align = "center">New Course Library</h3>
+					</tr>
+					<%= form_for @course do |f| %>
+					<%= render 'shared/error_messages', object: f.object %>
+
+					<tr><td><%= f.label :title, "Course Title" %></td>
+						<td><%= f.text_field :title %></td></tr>
+
+						<tr><td><%= f.label :author, "Author Name" %></td>
+							<td><%= f.text_field :author %></td></tr>
+
+						<tr><td><%= f.label :short_desc, "Short Description" %></td>
+							<td><%= f.text_field :short_desc %></td></tr>
+
+							<tr><td><%= f.label :desc, "Course Description" %></td>
+								<td><%= f.text_area :desc ,:cols => "30", :rows => "10" %></td></tr>
+
+								<tr><td><%= f.label 'attachment', "Image" %></td>
+									<td><%= f.file_field 'attachment' %></td></tr>
+
+									<tr><td><%= f.label :ispopular, "Popular" %></td>
+									<td><%= f.check_box :ispopular %></td></tr>
+									
+									<tr><td><%= f.label :ispublished, "Publish" %></td>
+									<td><%= f.check_box :ispublished ,:checked => true%></td></tr>
+
+
+									<tr><td><%= f.label :topic_id, "Topics" %></td>
+										<td><%= f.select(:topic_id, @topic.collect {|p| [ p.name,p.id ] })%></td></tr>
+
+										<tr><td></td><td><%= f.submit "Add Course", class: "btn btn-large btn-primary" %></td></tr>
+									</table>
+									<% end %>
+
+								</div>
+							</div>
+						</div>
+						<center>
+							<p><%= link_to "Back to Courses", courses_path %></p>
+						</center>
+					</div>
+				</div>

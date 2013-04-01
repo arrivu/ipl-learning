@@ -1,0 +1,81 @@
+<div class="pagehead separation">
+    <div class="container">
+      <form action="#" class="category-search" data-pjax="">
+        <span class="mini-icon mini-icon-search-input"><i class="icon-search"></i></span>
+         <input class="category-search-input" type="text" name="q" id="category-search" value="" tabindex="2"> 
+      </form>
+      <h1>Welcome to Course Library</h1>
+    </div>
+  </div>
+  <!-- Sub Head for Course Lib -->
+
+  <!-- Section Courses List -->
+  <div class="container categorygap">
+    <!-- List Right Categories -->
+    <div class="row">
+      <div class="span12 courselibsectioninfo">
+        <div class="courselibsectioninfo">
+        <div class="coursecount pull-left">
+           <span class="badge badge-info">Found&nbsp;&nbsp;<%= pluralize(@total_course_count, "Course") %></span>
+        </div>
+        <ul id="dropdownlistelse" class="pull-right moveup">
+            <li>
+                <a href="#">Sort By&nbsp;&nbsp;<i class="icon-arrow-down icon-white"></i></a>
+                <ul>
+                     <li><%= link_to "Date", datewise_courses_path %></li>
+                    <li><%= link_to "Upcoming" + " ( #{Course.where(ispublished: 0).all.size} )", courses_path %></li>
+                    <li><%= link_to "Popularity", popular_courses_path %></li>
+                    <li><a href="#">Subscribed</a></li>
+                   <li><%= link_to "Default", courses_path %></li>
+                </ul>
+            </li>
+        </ul>
+
+        <ul id="dropdownlistelse" class="pull-right moveup">
+            <li>
+                <a href="#">Categories&nbsp;&nbsp;<i class="icon-arrow-down icon-white"></i></a>
+                <ul>
+
+                    <li><%= link_to "All" + " ( #{Course.where(ispublished: 1).all.size} )", courses_path %></li>
+
+                   <% @topics.each do |topic| %>   
+                          <% @topicStructure = topic.name + " ( #{ topic.courses.where(ispublished: 1).size} )" %>
+                          <li><%= link_to @topicStructure, topic %></li>
+                    <%end%>      
+                </ul>
+            </li>
+        </ul>
+        <div class="clearfix"></div>
+        <!-- <div class="btn-group pull-right moveup">
+                <button class="btn dropdown-toggle btn-info" data-toggle="dropdown">Sort By&nbsp;&nbsp;<span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Date</a></li>
+                  <li><a href="#">Upcoming</a></li>
+                  <li><a href="#">Popularity</a></li>
+                  <li><a href="#">Sunbscribed</a></li>
+                  <li><a href="#">Default</a></li>
+                </ul>
+        </div> -->
+        <!-- <div class="btn-group pull-right rightgap moveup">
+                <button class="btn dropdown-toggle btn-info" data-toggle="dropdown">Categories&nbsp;&nbsp;<span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                  <li><a href="#">All</a></li>
+                  <li><a href="#">Accounting</a></li>
+                  <li><a href="#">Behavior</a></li>
+                  <li><a href="#">Strategy</a></li>
+                  <li><a href="#">Sunbscribed</a></li>
+                  <li><a href="#">Enterpreneurship</a></li>
+                  <li><a href="#">Team Building</a></li>
+                  <li><a href="#">Investment</a></li>
+                </ul>
+        </div> -->
+        
+        </div>
+        <div class="clearfix"></div>
+        <div class="clearfix"></div>
+        <%= render 'shared/courselist' %>
+      </div>
+    </div>
+  </div>
+
+
