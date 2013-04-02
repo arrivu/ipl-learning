@@ -49,7 +49,7 @@ Myapp::Application.routes.draw do
   
   resources :users do
   collection do
-    post 'addusers'
+    post 'add_users'
   end
 end
   match '/auth/:provider/callback' => 'authentication#create'

@@ -32,12 +32,12 @@ class UsersController < ApplicationController
     end
   end
 
-  def addusers
+  def add_users
   
     params[:user_emails].split(",").each do |email|
      User.new(:email => email ,:password => "123456789" , :ac_id => params[:ac_id]).save!
      flash[:success]= "User saved"
-
+redirect_to users_path
 
 
   end
