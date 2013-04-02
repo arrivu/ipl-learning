@@ -1,4 +1,51 @@
-<h1>Accounts#index</h1>
-<% @accounts.each do |account| %>
-<%= account.ac_name %>
-<% end  %>
+<br>
+<div class="row">
+<div class="span12 offset3">
+<ul class="nav nav-pills .pull-left">
+  <li >
+<%= link_to "Users", users_path %>
+</li><li>
+<%= link_to "New Course Library", new_course_path %>
+</li>
+<li>
+<%= link_to "Manage Course Library", manage_courses_path %>
+</li>
+  <li >
+ <%= link_to "New Category",new_topic_path %>
+ </li>
+
+<li>
+ <%= link_to "Manage Category", topics_path %>
+  </li>
+ <li><%= link_to "New Preview",new_preview_path %></li>
+ <li><%= link_to "Manage Preview",previews_path %></li>
+ <li><%= link_to "New Account",new_account_path %></li>
+ <li class="active"><%= link_to "Manage Account",accounts_path %></li>
+ </ul>
+<table class="table table-condensed table-hover">
+  <thead>
+    <tr>
+      <th>Account Name</th>
+      <th>Sub Domain Name</th>
+      <th>LMS ID</th>
+      <th>Created At</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+  <% @accounts.each do |account| %>
+    <tr>
+      <td><%= link_to account.ac_name, account %></td>
+      <td><%= account.sub_domain_name %></td>
+      <td><%= account.lms_account_id %></td>
+      <td><%= account.created_at.to_date %></td>
+      <td><%= link_to t('.edit', :default => t("helpers.links.edit")),
+        edit_account_path(account), :class => 'btn btn-mini' %>
+        </td>
+      <td><%= link_to("Delete account", account_path(account), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-mini btn-danger') %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+</div>
+</div>
