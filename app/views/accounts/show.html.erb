@@ -1,0 +1,6 @@
+<%= form_tag addusers_users_path, :method => :post do %>
+  <%= label_tag "Email ids " %>
+  <%= text_area_tag :user_emails %>
+  <%= hidden_field_tag :ac_id , @account.id%>
+  <%= submit_tag "Add" %>
+<% end %>

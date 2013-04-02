@@ -20,7 +20,9 @@ class AccountsController < ApplicationController
 			redirect_to new_account_path
 		end
 	end
-  def adduser
+ 
+  def show
+    @account =Account.find(params[:id])
     
   end
 end

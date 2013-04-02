@@ -31,7 +31,7 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :role_ids, :as => :admin
 
-  attr_accessible :attachment,:content_type,:image_blob,:lms_id,:name, :email, :password, :password_confirmation, :remember_me, :omni_image_url, :phone,:user_type,:sub_plan,:user_desc, :provider
+  attr_accessible :attachment,:content_type,:image_blob,:lms_id,:name, :email, :password, :password_confirmation, :remember_me, :omni_image_url, :phone,:user_type,:sub_plan,:user_desc, :provider, :ac_id
 
   has_many :courses, dependent: :destroy
   has_many :o_classes, :class_name => "O_Classe"
@@ -71,6 +71,10 @@ class User < ActiveRecord::Base
     self.content_type = incoming_file.content_type
     self.image_blob = incoming_file.read
   end
+
+def self.adduser(email,acid)
+  find_by_sql("insert into users (ac_id) values ( #{acid}  )")
+end
 
   before_destroy:delete_in_lms
   def delete_in_lms
