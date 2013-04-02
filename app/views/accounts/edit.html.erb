@@ -1,2 +1,50 @@
-<h1>Accounts#edit</h1>
-<p>Find me in app/views/accounts/edit.html.erb</p>
+
+<div class="row">
+	<div class="span12 offset3">
+		<ul class="nav nav-pills .pull-left">
+			<li >
+				<%= link_to "Users", users_path %>
+			</li>
+			<li><%= link_to "New Course Library", new_course_path %></li>
+			<li><%= link_to "Manage Course Library", manage_courses_path %></li>
+			<li ><%= link_to "New Category",new_topic_path %></li>
+			<li><%= link_to "Manage Category", topics_path %></li>
+			<li><%= link_to "New preview",new_preview_path %></li>
+			<li><%= link_to "Manage preview",previews_path %></li>
+			<li><%= link_to "New Account",new_account_path %></li>
+			<li class="active"><%= link_to "Manage Account",accounts_path %></li>
+
+		</ul>
+		<% provide(:title, 'Create Course') %>
+		<br>
+		<div class="row">
+			<div class="span10">
+				<div class = "hero-unit">
+					<table class="table table-hover ">
+						<tr>
+							<h3 align = "center">Edit Account</h3>
+						</tr>
+
+						<%= form_for(@account) do |f| %>
+						<%= render 'shared/error_messages', object: f.object %>
+						<tr><td><%= f.label :ac_name, "Account Name" %></td>
+							<td><%= f.text_field :ac_name %></td></tr>
+
+							<tr><td><%= f.label :sub_domain_name, "Sub Domain Name" %></td>
+								<td><%= f.text_field :sub_domain_name %></td></tr>
+
+								<tr><td><%= f.label :lms_account_id, "Short Description" %></td>
+									<td><%= f.text_field :lms_account_id %></td></tr>
+									<tr><td><%= f.label :is_active, "Active" %></td>
+										<td><%= f.check_box :is_active %></td></tr>
+										<tr><td><%= f.submit "Update Course", class: "btn btn-large btn-info" %></td> 
+											<td><%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+											accounts_path, :class => 'btn' %></td>
+										</tr>
+										<% end %>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
