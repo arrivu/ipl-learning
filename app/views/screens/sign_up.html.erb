@@ -1,0 +1,21 @@
+ 
+<div class="container">   
+	<div class="row">
+		<div class="span6 offset3">
+			<div class="hero-unit">
+				<h2>Sign up</h2>
+				<%= form_for @user do |f| %>
+					<%= render 'shared/error_messages', object: f.object %>
+				<%= f.error_notification %>
+				<%= display_base_errors User.new %>
+				<%= f.input :name, :autofocus => true %>
+				<%= f.input :email, :required => true %>
+				<%= f.input :password, :required => true %>
+				<%= f.input :password_confirmation, :required => true %>
+				<%= f.button :submit, 'Create my account', :class => 'btn-primary' %>
+				<% end %>
+				
+			</div>
+		</div>
+	</div>
+</div>

@@ -302,6 +302,7 @@ ActiveRecord::Schema.define(:version => 20130314093035551) do
     t.string   "content_type"
     t.binary   "image_blob"
     t.integer  "ac_id"
+    t.boolean  "is_active",              :default => false
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

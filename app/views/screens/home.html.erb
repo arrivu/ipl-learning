@@ -172,7 +172,7 @@
           <%= link_to "Browse Our Courses", courses_path, :class => "browseourcoursessmall" %>
           &nbsp;&nbsp;&nbsp;&nbsp;
           <% unless user_signed_in?%>
-          <a href="#sign_up_Modal" role="button" data-toggle="modal" class="browseourcoursessmall">Create Account</a>
+          <%= link_to "Create Account ", new_user_registration_path, :class => "browseourcoursessmall" %>
           <% end %>
         </div>
         <!-- <div class="span4">

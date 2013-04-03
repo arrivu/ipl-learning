@@ -1,6 +1,4 @@
-
-
-  <header class="navbar navbar-fixed-top" >
+<header class="navbar navbar-fixed-top" >
   <div >
     <div class="logo" >
       <a href="/">
@@ -46,8 +44,8 @@
             </ul>
           </li>
           <% else %>
-          <li ><a href="#loginmodal" role="button" data-toggle="modal"  >Log In</a></li>
-          <li ><a href="#sign_up_Modal" role="button" data-toggle="modal" >Create Account</a></li>
+          <li ><%= link_to "Log In", new_user_session_path %></li>
+          <li ><%= link_to "Create Account", new_user_registration_path %></li>
           <% end %>
         </ul>
       </nav>
