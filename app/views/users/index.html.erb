@@ -28,7 +28,7 @@
       <th>Email</th>
       <th>Registered</th>
       <th>Role</th>
-      <th></th>
+      <th>Enable</th>
       <th></th>
     </tr>
   </thead>
@@ -39,11 +39,15 @@
       <td><%= user.email %></td>
       <td><%= user.created_at.to_date %></td>
       <td><%= user.roles.first.name.titleize unless user.roles.first.nil? %></td>
+      <%= form_for user do |f| %>
+      <td><%= f.check_box :is_active %></td>
+      <td><%= f.submit "Update", class: "btn btn-mini btn-info" %></td>
+      <% end %>
       <td>
         <a data-toggle="modal" href="#role-options-<%= user.id %>" class="btn btn-mini" type="button">Change role</a>
         <%= render user %>
       </td>
-      <td><%= link_to("Delete user", user_path(user), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-mini') unless user == current_user %></td>
+      <td><%= link_to("Delete user", user_path(user), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-mini btn-danger') unless user == current_user %></td>
     </tr>
   <% end %>
   </tbody>
