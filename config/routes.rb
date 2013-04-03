@@ -22,10 +22,10 @@ Myapp::Application.routes.draw do
   resources :o_classes
   resources :previews
   resources :accounts do
-    member do
-      get 'adduser'
-    end
+  collection do
+    post 'add_users'
   end
+end
   authenticated :user do
     root :to => 'screens#home'
   end
@@ -51,7 +51,11 @@ Myapp::Application.routes.draw do
     match '/user_image', :to => 'registrations#user_image' 
   end
   
-  resources :users
+  resources :users do
+  collection do
+    post 'add_users'
+  end
+end
   match '/auth/:provider/callback' => 'authentication#create'
   resources :comments, :path_prefix => '/:commentable_type/:commentable_id'
 

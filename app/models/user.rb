@@ -29,8 +29,8 @@ class User < ActiveRecord::Base
   :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :role_ids,:is_active, :as => :admin
 
+  attr_accessible :role_ids,:is_active, :as => :admin
   attr_accessible :attachment,:content_type,:image_blob,:lms_id,:name,
    :email, :password, :password_confirmation, :remember_me, :omni_image_url,
     :phone,:user_type,:sub_plan,:user_desc, :provider
@@ -73,6 +73,9 @@ class User < ActiveRecord::Base
     self.image_blob = incoming_file.read
   end
 
+
+
+ 
   before_destroy:delete_in_lms
   def delete_in_lms
     if lms_enable? 

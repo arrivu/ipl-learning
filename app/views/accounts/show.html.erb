@@ -1,0 +1,61 @@
+
+
+<div class="container">
+	
+	<div class="row">
+		<br/>
+		<ul class="breadcrumb">
+  <li><label> Account name : <%= @account.ac_name %>  | </label>
+  <li><label style ="padding-left:10px;"> Subdomain name : <%= @account.sub_domain_name %></a></label>
+  
+</ul>
+		<br/>
+		
+
+		<%= form_tag add_users_users_path, multipart: true, :class => "form-horizontal", :id => "registerHere",:method => :post do %>
+		<fieldset style="margin-left:250px; margin-right:200px;">
+			<legend>Add User to Account</legend>
+			<div class="control-group">
+				<% if $error != nil %>
+				<%= render 'shared/error_messages', object: $error %>
+				<% end %>
+			</div>
+			<div class="control-group" style="margin-left:0px;padding-left:0px;">
+				<label class="control-label" style="text-align:left;">Email IDs</label>
+				<div class="controls" >
+					<%= text_area_tag  :user_emails , "", :cols => "300", :rows =>"6", :placeholder => "Ex : raj@gmail.com,ravi@gmail.com" %>
+				</div>
+			</div>
+			
+			<%= hidden_field_tag :ac_id ,@account.id%>
+			<div class="control-group"><div class="controls"> OR </div>
+
+		</div>
+		<div class="control-group">
+			<label class="control-label" style="text-align:left;">Upload CSV file</label>
+			<div class="controls">
+				<%= file_field_tag :file %>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="input01"></label>
+				<div class="controls">
+					<%= submit_tag "Add User" , :class => "btn btn-success" %>
+				</div>
+
+			</div>
+
+
+
+		</fieldset>
+		<% end %>
+	</div>
+	</div> <script type="text/javascript">
+	$(document).ready(function(){
+		$('#registerHere textarea').hover(function()
+		{
+			$(this).popover('show')
+		}
+		);
+
+	});
+	</script>
