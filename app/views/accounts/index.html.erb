@@ -39,6 +39,7 @@
       <td><%= account.sub_domain_name %></td>
       <td><%= account.lms_account_id %></td>
       <td><%= account.created_at.to_date %></td>
+    
       <td><%= link_to t('.edit', :default => t("helpers.links.edit")),
         edit_account_path(account), :class => 'btn btn-mini' %>
         </td>
