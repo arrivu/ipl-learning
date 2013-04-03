@@ -1,7 +1,9 @@
 class AccountsController < ApplicationController
 
   def index
+    $error =nil
   	@accounts =  Account.order(:ac_name)
+
   end
 
   def new
@@ -13,21 +15,22 @@ class AccountsController < ApplicationController
   end
 
   def create
-		@account = Account.new(params[:account])
-		if @account.save
-			flash[:success] = "account added successfully!!!!"
-			redirect_to accounts_path
-		else
-			redirect_to new_account_path
-		end
-	end
+    @account = Account.new(params[:account])
+    if @account.save
+     flash[:success] = "account added successfully!!!!"
+     redirect_to accounts_path
+   else
+     redirect_to new_account_path
+   end
+ end
  
-  def show
-    @account =Account.find(params[:id])
-    
-  end
+ def show
+  
+  @account =Account.find(params[:id])
+
+  
 end
-def adduser
+  def adduser
 
 end
 

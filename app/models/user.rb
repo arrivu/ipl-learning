@@ -72,10 +72,9 @@ class User < ActiveRecord::Base
     self.image_blob = incoming_file.read
   end
 
-def self.adduser(email,acid)
-  find_by_sql("insert into users (ac_id) values ( #{acid}  )")
-end
 
+
+ 
   before_destroy:delete_in_lms
   def delete_in_lms
     if lms_enable? 

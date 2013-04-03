@@ -21,7 +21,11 @@ Myapp::Application.routes.draw do
   resources :under_constructions
   resources :o_classes
   resources :previews
-  resources :accounts
+  resources :accounts do
+  collection do
+    post 'add_users'
+  end
+end
   authenticated :user do
     root :to => 'screens#home'
   end

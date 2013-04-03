@@ -1,3 +1,29 @@
 // Place all the styles related to the accounts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+#contentbox{
+	padding:0;
+	margin:0;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border:2px solid #b8c6dd;
+	width:450px;
+}
+#contentbox .title{
+	background-image:url(background.gif);
+	background-repeat:repeat-x;
+	padding:13px;
+	font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+	font-size:25px;
+	color: #FFF;
+	font-weight:bold;
+	text-shadow: #069 1px 1px 1px;
+}
+#contentbox .content{
+	font-size:16px;
+	color: #666;
+	font-family: Tahoma, Geneva, sans-serif;
+	padding:6px;
+	line-height:24px;
+	border-bottom:15px solid #b8c6dd;
+}

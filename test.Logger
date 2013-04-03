@@ -11,3 +11,28 @@ mani@gmail.com
 ram@gmail.com
 mani@gmail.com
 ram@gmail.com
+email
+nil
+email
+email
+email
+email
+email
+#<Spreadsheet::Excel::Row:0x003ffd160b7dc4 @default_format= @worksheet=#<Spreadsheet::Excel::Worksheet:0x007ffa20128a50> @idx=0 @formats=[#<Spreadsheet::Format:0x007ffa20117958 @font=#<Spreadsheet::Font:0x007ffa200e75a0 @name="Arial", @color=:text, @previous_fast_key=nil, @size=10, @weight=400, @italic=false, @strikeout=false, @outline=false, @shadow=false, @escapement=:normal, @underline=:none, @family=:swiss, @encoding=:iso_latin1>, @number_format="GENERAL", @rotation=0, @pattern=0, @bottom_color=:builtin_black, @top_color=:builtin_black, @left_color=:builtin_black, @right_color=:builtin_black, @diagonal_color=:builtin_black, @pattern_fg_color=:border, @pattern_bg_color=:pattern_bg, @regexes={:date=>/[YMD]/, :date_or_time=>/[hmsYMD]/, :datetime=>/([YMD].*[HS])|([HS].*[YMD])/, :time=>/[hms]/}, @used_merge=0, @horizontal_align=:default, @text_wrap=false, @vertical_align=:bottom, @rotation_stacked=false, @indent_level=0, @shrink=false, @text_direction=:context, @left=:none, @right=:none, @top=:none, @bottom=:none, @cross_down=false, @cross_up=false>] @height= @outline_level=0 @hidden=false ["email"]>
+nil
+#<Spreadsheet::Excel::Row:0x003ffd100776d0 @default_format= @worksheet=#<Spreadsheet::Excel::Worksheet:0x007ffa2c144f28> @idx=0 @formats=[#<Spreadsheet::Format:0x007ffa2c161a88 @font=#<Spreadsheet::Font:0x007ffa20149db8 @name="Arial", @color=:text, @previous_fast_key=nil, @size=10, @weight=400, @italic=false, @strikeout=false, @outline=false, @shadow=false, @escapement=:normal, @underline=:none, @family=:swiss, @encoding=:iso_latin1>, @number_format="GENERAL", @rotation=0, @pattern=0, @bottom_color=:builtin_black, @top_color=:builtin_black, @left_color=:builtin_black, @right_color=:builtin_black, @diagonal_color=:builtin_black, @pattern_fg_color=:border, @pattern_bg_color=:pattern_bg, @regexes={:date=>/[YMD]/, :date_or_time=>/[hmsYMD]/, :datetime=>/([YMD].*[HS])|([HS].*[YMD])/, :time=>/[hms]/}, @used_merge=0, @horizontal_align=:default, @text_wrap=false, @vertical_align=:bottom, @rotation_stacked=false, @indent_level=0, @shrink=false, @text_direction=:context, @left=:none, @right=:none, @top=:none, @bottom=:none, @cross_down=false, @cross_up=false>] @height= @outline_level=0 @hidden=false ["email"]>
+email
+e@e.com
+manik12@gmail.com
+ramm@gmail.com
+e@e.com
+ee@g
+ee@g
+g@g.com
+m@mm.com
+g@g.com
+g@g.com
+g@g.com
+m@mm.com
+g@g.com
+m@mm.com

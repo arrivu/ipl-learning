@@ -14,7 +14,6 @@ gem 'omniauth-facebook'
 gem 'omniauth-linkedin'
 gem 'activemerchant'
 gem 'active_merchant_ccavenue'
-
 gem 'omniauth-google-oauth2'
 
 gem 'oauth2'
@@ -69,3 +68,4 @@ gem 'annotate', '2.4.1.beta1'
 gem 'couponsgem',:git => 'git://github.com/m-narayan/couponsgem'
 gem 'invoicing',:git => 'git://github.com/m-narayan/invoicing'
 
+gem 'roo'
