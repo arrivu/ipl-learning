@@ -24,8 +24,10 @@ class UsersController < ApplicationController
        begin
          UserEnableMailer.welcome_email(@user).deliver
          flash[:info]= "User updated and activation mail sent !"
-       rescue
-        flash[:info] = "There is some error while sending the email ..."
+
+       rescue => e
+        flash[:info] = "There is some error while sending the email .[ #{e.message}]"
+
       end
       redirect_to users_path
     end
@@ -47,66 +49,68 @@ def destroy
 end
 
 def add_users
-if(params[:file] != nil && params[:user_emails]!= "")
-  flash[:error] = "Please give any one input"
-  redirect_to (account_path(params[:ac_id]))
-elsif (params[:file] == nil && params[:user_emails]== "")
-  flash[:error] = "Please give any one input"
-  redirect_to (account_path(params[:ac_id]))
-else
 
-  if (params[:file] == nil)
-    params[:user_emails].split(",").each do |email|
-      @post = User.new(:email => email ,:password => "123456789" , :ac_id => params[:ac_id])
-      
-      if @post.save
-        $error =nil
+  if(params[:file] != nil && params[:user_emails]!= "")
+    flash[:error] = "Please give any one input"
+    redirect_to (account_path(params[:ac_id]))
+  elsif (params[:file] == nil && params[:user_emails]== "")
+    flash[:error] = "Please give any one input"
+    redirect_to (account_path(params[:ac_id]))
+  else
+
+    if (params[:file] == nil)
+      params[:user_emails].split(",").each do |email|
+        @post = User.new(:email => email ,:password => "123456789" , :ac_id => params[:ac_id])
+
+        if @post.save
+          $error =nil
+        end
+      end        
+
+    else
+      require 'spreadsheet'
+      file = params[:file]
+      acid =params[:ac_id]
+      case File.extname(file.original_filename)
+      when ".csv" then
+        CSV.foreach(file.path) do |row|
+          email =row[0]
+          @post =User.new(:email => email ,:password => "123456789" , :ac_id => acid)
+          if @post.save
+            $error =nil
+
+          end
+        end
+      when ".txt" then
+       data=""
+       File.open(file.path).each_line do |line|
+        data += line
       end
-    end        
-  
-else
-  require 'spreadsheet'
-  file = params[:file]
-  acid =params[:ac_id]
-  case File.extname(file.original_filename)
-  when ".csv" then
-    CSV.foreach(file.path) do |row|
-      email =row[0]
-      @post =User.new(:email => email ,:password => "123456789" , :ac_id => acid)
-      if @post.save
-        $error =nil
+      data.split(",").each do |email|
+
+        @post =User.new(:email => email ,:password => "123456789" , :ac_id => acid)
+        if @post.save
+          $error =nil
+        end
       end
+    when ".xls" || "xlsx" then
+      Spreadsheet.client_encoding = 'UTF-8'
+      book = Spreadsheet.open(file.path, :col_sep => ',', :headers => true )
+      sheet1 = book.worksheet 0
+      sheet1.each do |row|
+        email =row[0]
+        @post =User.new(:email => email ,:password => "123456789" , :ac_id => acid)
+        if @post.save
+          $error =nil
+        end
+
+
+      end
+    else raise "Unknown file type: #{file.original_filename}"
     end
-   
-  when ".txt" then
-     data=""
-  File.open(file.path).each_line do |line|
-    data += line
-end
-   data.split(",").each do |email|
-     
-      @post =User.new(:email => email ,:password => "123456789" , :ac_id => acid)
-      if @post.save
-        $error =nil
-      end
-    end
-  when ".xls" || "xlsx" then
-    Spreadsheet.client_encoding = 'UTF-8'
-    book = Spreadsheet.open(file.path, :col_sep => ',', :headers => true )
-    sheet1 = book.worksheet 0
-    sheet1.each do |row|
-      email =row[0]
-      @post =User.new(:email => email ,:password => "123456789" , :ac_id => acid)
-      if @post.save
-        $error =nil
-      end
-    end
-  else raise "Unknown file type: #{file.original_filename}"
+
   end
-
-end
-
-respond_to do |format|
+  respond_to do |format|
   if @post.save
     $error =nil
     format.js
@@ -123,5 +127,7 @@ respond_to do |format|
   end
 end
 end
+
 end
+
 end
