@@ -24,8 +24,8 @@ class UsersController < ApplicationController
        begin
          UserEnableMailer.welcome_email(@user).deliver
          flash[:info]= "User updated and activation mail sent !"
-       rescue
-        flash[:info] = "There is some error while sending the email ..."
+       rescue => e
+        flash[:info] = "There is some error while sending the email .[ #{e.message}]"
       end
       redirect_to users_path
     end
