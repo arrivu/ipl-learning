@@ -8,7 +8,6 @@ require "active_resource/railtie"
 require "sprockets/railtie"
 require 'will_paginate/array'
 require 'csv'
-require 'iconv'
 require 'rails/all'
 # require "rails/test_unit/railtie"
 
