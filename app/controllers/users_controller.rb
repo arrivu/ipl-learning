@@ -32,7 +32,6 @@ class UsersController < ApplicationController
       redirect_to users_path
     end
   else
-
     redirect_to users_path, :alert => "Unable to update user."
   end
 end
@@ -49,7 +48,8 @@ def destroy
 end
 
 def add_users
-
+log=Logger.new("./test.Logger")
+log.debug params[:activate]
   if(params[:file] != nil && params[:user_emails]!= "")
     flash[:error] = "Please give any one input"
     redirect_to (account_path(params[:ac_id]))
@@ -60,9 +60,10 @@ def add_users
 
     if (params[:file] == nil)
       params[:user_emails].split(",").each do |email|
-        @post = User.new(:email => email ,:password => "123456789" , :ac_id => params[:ac_id])
-
+        @post = User.new(:email => email ,:password => "123456789" , :ac_id => params[:ac_id] , :is_active => params[:activate] )
+        
         if @post.save
+          
           $error =nil
         end
       end        
@@ -75,7 +76,7 @@ def add_users
       when ".csv" then
         CSV.foreach(file.path) do |row|
           email =row[0]
-          @post =User.new(:email => email ,:password => "123456789" , :ac_id => acid)
+          @post =User.new(:email => email ,:password => "123456789" , :ac_id => acid , :is_active => params[:activate])
           if @post.save
             $error =nil
 
@@ -88,7 +89,7 @@ def add_users
       end
       data.split(",").each do |email|
 
-        @post =User.new(:email => email ,:password => "123456789" , :ac_id => acid)
+        @post =User.new(:email => email ,:password => "123456789" , :ac_id => acid , :is_active => params[:activate])
         if @post.save
           $error =nil
         end
@@ -99,33 +100,31 @@ def add_users
       sheet1 = book.worksheet 0
       sheet1.each do |row|
         email =row[0]
-        @post =User.new(:email => email ,:password => "123456789" , :ac_id => acid)
+        @post =User.new(:email => email ,:password => "123456789" , :ac_id => acid , :is_active => params[:activate])
         if @post.save
           $error =nil
         end
-
-
       end
     else raise "Unknown file type: #{file.original_filename}"
     end
 
   end
   respond_to do |format|
-  if @post.save
-    $error =nil
-    format.js
-    format.html { redirect_to (account_path(params[:ac_id])) }
-    flash[:success] = "user added to account successfully!!!!"
-    format.xml  { render :xml => @post, :status => :created, :location => @post }
-  else
-    $error =nil
-    format.xml  { render :xml => @post.errors, :status => :unprocessable_entity }
+    if @post.save
+      $error =nil
+      format.js
+      format.html { redirect_to (account_path(params[:ac_id])) }
+      flash[:success] = "user added to account successfully!!!!"
+      format.xml  { render :xml => @post, :status => :created, :location => @post }
+    else
+      $error =nil
+      format.xml  { render :xml => @post.errors, :status => :unprocessable_entity }
 
-    format.html { redirect_to (account_path(params[:ac_id])) }
-    $error = @post
+      format.html { redirect_to (account_path(params[:ac_id])) }
+      $error = @post
 
+    end
   end
-end
 end
 
 end

@@ -32,8 +32,7 @@ class User < ActiveRecord::Base
   attr_accessible :role_ids,:is_active, :as => :admin
   attr_accessible :attachment,:content_type,:image_blob,:lms_id,:name,
    :email, :password, :password_confirmation, :remember_me, :omni_image_url,
-
-    :phone,:user_type,:sub_plan,:user_desc, :provider,:ac_id
+    :phone,:user_type,:sub_plan,:user_desc, :provider,:ac_id,:is_active
 
   has_many :courses, dependent: :destroy
   has_many :o_classes, :class_name => "O_Classe"
