@@ -6,4 +6,5 @@ class UserEnableMailer < ActionMailer::Base
     headers["X-Spam"] = nil
     mail(:to => user.email, :subject => "Welcome to Institue of Product Leadership Site")
   end
+  
 end
