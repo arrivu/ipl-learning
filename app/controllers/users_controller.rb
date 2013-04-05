@@ -23,7 +23,7 @@ class UsersController < ApplicationController
       else
        # Tell the UserMailer to send a welcome Email after save
        begin
-         UserEnableMailer.welcome_email(@user).deliver
+        UserEnableMailer.welcome_email(@user,"").deliver
          flash[:info]= "User updated and activation mail sent !"
 
        rescue => e
@@ -49,8 +49,7 @@ def destroy
 end
 
 def add_users
-  log=Logger.new("./test.Logger")
-  log.debug params[:activate]
+
   if(params[:file] != nil && params[:user_emails]!= "")
     flash[:error] = "Please give any one input"
     redirect_to (account_path(params[:ac_id]))
@@ -96,7 +95,8 @@ def add_users
     when ".csv" then
       CSV.foreach(file.path) do |row|
         email =row[0]
-        @post =User.new(:email => email ,:password => Time.now , :ac_id => acid , :is_active => params[:activate])
+        random_string = ('0'..'z').to_a.shuffle.first(8).join
+        @post =User.new(:email => email ,:password => random_string , :ac_id => acid , :is_active => params[:activate])
         if ( params[:activate] != nil) 
           @post.skip_confirmation!
 
@@ -126,8 +126,8 @@ def add_users
     data += line
   end
   data.split(",").each do |email|
-
-    @post =User.new(:email => email ,:password => Time.now , :ac_id => acid , :is_active => params[:activate])
+    random_string = ('0'..'z').to_a.shuffle.first(8).join
+    @post =User.new(:email => email ,:password => random_string, :ac_id => acid , :is_active => params[:activate])
     if ( params[:activate] != nil) 
       @post.skip_confirmation!
 
@@ -157,7 +157,8 @@ when ".xls" || "xlsx" then
   sheet1 = book.worksheet 0
   sheet1.each do |row|
     email =row[0]
-    @post =User.new(:email => email ,:password => Time.now , :ac_id => acid , :is_active => params[:activate])
+    random_string = ('0'..'z').to_a.shuffle.first(8).join
+    @post =User.new(:email => email ,:password => random_string , :ac_id => acid , :is_active => params[:activate])
     if ( params[:activate] != nil) 
       @post.skip_confirmation!
 

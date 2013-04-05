@@ -7,14 +7,19 @@
     <h1>Welcome to Institue of Product Leadership , <%= @user.name %></h1>
     <p>
       You have successfully signed up to Institue of Product Leadership ,
-      your Name is: <%= @user.name %>.<br/>
+      <br/>
+      your Username is: <%= @user.email %>
     </p>
+    
     <p>
       To login to the site, just follow this link: <%= @url %>.
     </p>
+    <%if @password != ""%>
     <p>
-      Your current password <%= @password %>.
+
+      Your  password <%= @password %>
     </p>
+    <% end %>
     <p>Thanks for joining and have a great day!</p>
   </body>
 </html>
