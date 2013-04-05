@@ -7,8 +7,6 @@ task populate: :environment do
 # #       t.string :category
 # #       t.string :image
 # #       t.string :desc
-
-
 users_hash = {
 			1 => [Faker::Name.name, #Name
 				Faker::Internet.free_email, #email
@@ -90,13 +88,15 @@ users_hash = {
 		}
 
 		users_hash.each do |key, array|
-			User.create!(name: array[0],
+			user = User.new(name: array[0],
 				email: array[1],
 				password: array[2],
 				password_confirmation: array[2],
 				user_type: array[3],
 				sub_plan: array[4],
 				user_desc: array[5])
+			user.skip_confirmation!
+			user.save
 		end
 
 
@@ -224,8 +224,8 @@ users_hash = {
 										Topic.create!(
 											name: array[0],
 											desc: array[1],
-										)
-											end
+											)
+									end
 
 
 
@@ -683,6 +683,6 @@ users_hash = {
 		# followed_users.each { |followed| user.follow!(followed) }
 		# followers.each 	    { |follower| follower.follow!(user) }
 
-
+		User.update_all(:confirmed_at => Time.now)
 	end
 end

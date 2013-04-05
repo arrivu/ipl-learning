@@ -16,7 +16,9 @@ Role.create([
 	{ :name => 'designer' }
 	], :without_protection => true)
 puts 'SETTING UP DEFAULT USER LOGIN'
-user = User.create! :name => 'Administrator', :email => 'admin@admin.com', :password => 'Admin123$', :password_confirmation => 'Admin123$', :provider=>"admin"
+user = User.new(:name => 'Administrator', :email => 'admin@admin.com', :password => 'Admin123$', :password_confirmation => 'Admin123$', :provider=>"admin", :is_active => 'true')
+user.skip_confirmation!
+user.save
 puts 'User created: ' << user.name
 
 user.add_role :admin

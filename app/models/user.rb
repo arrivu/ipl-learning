@@ -23,16 +23,14 @@ class User < ActiveRecord::Base
 
   rolify
   # Include default devise modules. Others available are:
-  # :token_authenticatable , :lockable, :timeoutable and :omniauthable
+  # :token_authenticatable , :lockable, :timeoutable and :omniauthable, :confirmable
   devise :database_authenticatable, :registerable,
-  :recoverable, :rememberable, :trackable, :validatable , :confirmable
-
+  :recoverable, :rememberable, :trackable, :validatable, :confirmable
   # Setup accessible (or protected) attributes for your model
-
   attr_accessible :role_ids,:is_active, :as => :admin
   attr_accessible :attachment,:content_type,:image_blob,:lms_id,:name,
-   :email, :password, :password_confirmation, :remember_me, :omni_image_url,
-    :phone,:user_type,:sub_plan,:user_desc, :provider,:ac_id,:is_active
+  :email, :password, :password_confirmation, :remember_me, :omni_image_url,
+  :phone,:user_type,:sub_plan,:user_desc, :provider,:ac_id,:is_active
 
   has_many :courses, dependent: :destroy
   has_many :o_classes, :class_name => "O_Classe"
@@ -75,7 +73,7 @@ class User < ActiveRecord::Base
 
 
 
- 
+  
   before_destroy:delete_in_lms
   def delete_in_lms
     if lms_enable? 
