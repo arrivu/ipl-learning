@@ -61,8 +61,8 @@ def add_users
     if (params[:file] == nil)
       params[:user_emails].split(",").each do |email|
         random_string = ('0'..'z').to_a.shuffle.first(8).join
-        @post = User.new(:email => email ,:password => random_string , :ac_id => params[:ac_id] , :is_active => params[:activate] )
-        if ( params[:activate] != nil) 
+        @post = User.new(:email => email ,:password => random_string , :ac_id => params[:ac_id] , :is_active => 1 )
+        
           @post.skip_confirmation!
 
           if @post.save
@@ -77,13 +77,7 @@ def add_users
           flash[:info] = "There is some error while sending the email .[ #{e.message}]"
 
         end
-      else
-        if @post.save
-
-          $error =nil
-        end
-
-      end
+      
 
     end        
 
@@ -96,8 +90,8 @@ def add_users
       CSV.foreach(file.path) do |row|
         email =row[0]
         random_string = ('0'..'z').to_a.shuffle.first(8).join
-        @post =User.new(:email => email ,:password => random_string , :ac_id => acid , :is_active => params[:activate])
-        if ( params[:activate] != nil) 
+        @post =User.new(:email => email ,:password => random_string , :ac_id => acid , :is_active => 1)
+        
           @post.skip_confirmation!
 
           if @post.save
@@ -112,13 +106,7 @@ def add_users
           flash[:info] = "There is some error while sending the email .[ #{e.message}]"
 
         end
-      else
-        if @post.save
-
-          $error =nil
-        end
-
-      end
+      
     end
   when ".txt" then
    data=""
@@ -127,8 +115,8 @@ def add_users
   end
   data.split(",").each do |email|
     random_string = ('0'..'z').to_a.shuffle.first(8).join
-    @post =User.new(:email => email ,:password => random_string, :ac_id => acid , :is_active => params[:activate])
-    if ( params[:activate] != nil) 
+    @post =User.new(:email => email ,:password => random_string, :ac_id => acid , :is_active => 1)
+    
       @post.skip_confirmation!
 
       if @post.save
@@ -143,13 +131,7 @@ def add_users
       flash[:info] = "There is some error while sending the email .[ #{e.message}]"
 
     end
-  else
-    if @post.save
-
-      $error =nil
-    end
-
-  end
+ 
 end
 when ".xls" || "xlsx" then
   Spreadsheet.client_encoding = 'UTF-8'
@@ -158,8 +140,8 @@ when ".xls" || "xlsx" then
   sheet1.each do |row|
     email =row[0]
     random_string = ('0'..'z').to_a.shuffle.first(8).join
-    @post =User.new(:email => email ,:password => random_string , :ac_id => acid , :is_active => params[:activate])
-    if ( params[:activate] != nil) 
+    @post =User.new(:email => email ,:password => random_string , :ac_id => acid , :is_active => 1)
+    
       @post.skip_confirmation!
 
       if @post.save
@@ -174,13 +156,7 @@ when ".xls" || "xlsx" then
       flash[:info] = "There is some error while sending the email .[ #{e.message}]"
 
     end
-  else
-    if @post.save
-
-      $error =nil
-    end
-
-  end
+ 
 end
 else raise "Unknown file type: #{file.original_filename}"
 end
