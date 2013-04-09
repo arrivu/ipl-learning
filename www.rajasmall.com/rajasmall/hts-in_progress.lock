@@ -1,7 +1,0 @@
-Mirror in progress since Tue, 09 Apr 2013 13:55:24 .. please wait!
-winhttrack www.rajasmall.com -O "www.rajasmall.com/rajasmall" -%v 
-To pause the engine: create an empty file named 'hts-stop.lock'
-PID=7005
-UID=1000
-GID=1000
-START=1365495924
