@@ -34,15 +34,15 @@
   				<h3 align="left" style="margin: 0px 0px 0px -43px;font-size:19px;">   Login using</h3>
   				<div style="margin-left:10px;margin-top:55px;">
 
-  					<%= link_to image_tag("loginfacebook.png",:class => "login_img", alt: ""), '/auth/facebook/' %>
+  					<%= link_to image_tag("loginfacebook.png",:class => "login_img", alt: ""), user_omniauth_authorize_path(:facebook) %>
   					<br>
   					Facebook
   					<br><br>
-  					<%= link_to image_tag("Google_Logo.jpg", :class => "login_img", alt: ""), '/auth/google_oauth2/' %>
+  					<%= link_to image_tag("Google_Logo.jpg", :class => "login_img", alt: ""), user_omniauth_authorize_path(:google_oauth2) %>
   					<br>
   					Google
   					<br><br>
-  					<%= link_to image_tag("login-linkedin.png", :class => "login_img", alt: ""), '/auth/linkedin/' %>
+  					<%= link_to image_tag("login-linkedin.png", :class => "login_img", alt: ""), user_omniauth_authorize_path(:linkedin) %>
   					<br>
   					LinkedIn
   				</div>

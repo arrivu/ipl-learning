@@ -36,7 +36,7 @@
            <br>
            Google
            <br><br>
-           <%= link_to image_tag("login-linkedin.png", :class => "login_img", alt: ""), '/auth/linkedin/' %>
+           <%= link_to image_tag("login-linkedin.png", :class => "login_img", alt: ""), user_omniauth_authorize_path(:linkedin) %>
            <br>
            LinkedIn
          </div>

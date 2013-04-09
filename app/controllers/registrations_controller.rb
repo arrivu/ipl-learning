@@ -7,16 +7,19 @@ class RegistrationsController < Devise::RegistrationsController
     send_data @user.image_blob, :type => @user.content_type, :disposition => 'inline'
   end
 
-   def new
+  def new
     resource = build_resource({})
     respond_with resource
   end
 
   # POST /resource
   def create
- build_resource
+   build_resource
+   if (request.subdomain != nil && Account.find_by_sub_domain_name(request.subdomain))
+     @subdomain = Account.find_by_sub_domain_name!(request.subdomain)
+     resource.ac_id =@subdomain.id
 
-    if resource.save
+     if resource.save
       if resource.active_for_authentication?
         set_flash_message :notice, :signed_up if is_navigational_format?
         # sign_up(resource_name, resource)
