@@ -1,7 +1,7 @@
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
 Devise.setup do |config|
-  
+
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class with default "from" parameter.
@@ -99,7 +99,7 @@ Devise.setup do |config|
   # their account can't be confirmed with the token any more.
   # Default is nil, meaning there is no restriction on how long a user can take
   # before confirming their account.
-   config.confirm_within = 3.days
+  config.confirm_within = 3.days
 
   # If true, requires any email changes to be confirmed (exactly the same way as
   # initial account confirmation) to be applied. Requires additional unconfirmed_email
@@ -265,4 +265,8 @@ Devise.setup do |config|
   #  auth.cookies.delete :tgt
   #end
 
+  require "omniauth-facebook"
+  config.omniauth :facebook, "586163688080266", "093ab151dc5385a434b0e03815ac851f", { access_type: "offline", approval_prompt: "" }
+  require "omniauth-google-oauth2"
+config.omniauth :google_oauth2, "1024217888502.apps.googleusercontent.com", "2vgDbzzwpqB45yO1NBvxB45t", { access_type: "offline", approval_prompt: "" }
 end
