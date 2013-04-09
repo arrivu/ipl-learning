@@ -1,5 +1,5 @@
 Myapp::Application.routes.draw do
-  
+
   match '/rate' => 'rater#create', :as => 'rate'
 
 
@@ -11,28 +11,28 @@ Myapp::Application.routes.draw do
   resources :courses do
     member do
      get 'course_payment'
-    end
-  end
-  match 'courses/confirm_course_payment',:to=>'courses#confirm_course_payment'
-  match "/download_pdf(.:format)" => "courses#index_pdf", :method => :get, :as=>:index_pdf
-  resources :topics
-  resources :tutorials
-  resources :groups
-  resources :under_constructions
-  resources :o_classes
-  resources :previews
-  resources :accounts do
+   end
+ end
+ match 'courses/confirm_course_payment',:to=>'courses#confirm_course_payment'
+ match "/download_pdf(.:format)" => "courses#index_pdf", :method => :get, :as=>:index_pdf
+ resources :topics
+ resources :tutorials
+ resources :groups
+ resources :under_constructions
+ resources :o_classes
+ resources :previews
+ resources :accounts do
   collection do
     post 'add_users'
   end
 end
-  authenticated :user do
-    root :to => 'screens#home'
-  end
+authenticated :user do
   root :to => 'screens#home'
-  match '/about', :to => 'screens#about'
-  match '/privacy', :to => 'screens#privacy'
-  match '/terms', :to => 'screens#terms'
+end
+root :to => 'screens#home'
+match '/about', :to => 'screens#about'
+match '/privacy', :to => 'screens#privacy'
+match '/terms', :to => 'screens#terms'
 
   #match '/contact', :to => 'screens#contact'
   #match '/faq', :to => 'screens#faq'
@@ -45,20 +45,23 @@ end
   match '/show_image', :to => 'courses#show_image' 
   match '/show_image', :to => 'topics#show_image' 
   match '/show_image', :to => 'screens#show_image' 
-
-  devise_for :users, :controllers => {:registrations => "registrations"}
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+  devise_for :users, :controllers => {:registrations => "registrations", :sessions => "sessions"}
   devise_scope :user do
+    get 'sign_in', :to => 'devise/sessions#new', :as => :new_user_session
+    get 'sign_out', :to => 'devise/sessions#destroy', :as => :destroy_user_session
+    get '/users/auth/:provider' => 'users/omniauth_callbacks#passthru'
     match '/user_image', :to => 'registrations#user_image' 
   end
-  
-  resources :users do
-  collection do
-    post 'add_users'
-  end
-end
-  match '/auth/:provider/callback' => 'authentication#create'
-  resources :comments, :path_prefix => '/:commentable_type/:commentable_id'
 
-  match '/my_courses', :to => 'courses#my_courses'  
+  resources :users do
+    collection do
+      post 'add_users'
+    end
+  end
+# match '/auth/:provider/callback' => 'authentication#create'
+resources :comments, :path_prefix => '/:commentable_type/:commentable_id'
+
+match '/my_courses', :to => 'courses#my_courses'  
 end
 

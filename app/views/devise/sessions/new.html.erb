@@ -1,25 +1,25 @@
 <br> 
 <div class="row">
   
-    <div class="span6 offset5">
-      <div style="width:500px;border-radius:5px;border:1px solid #ddd;box-shadow: 1px 1px 2px 1px;">
-    <h3 id="myModalLabel" align="center">Login </h3>
-    <div class="modal-body">
-      <%= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => 'form-vertical' }) do |f| %>
-      <table style="margin-left:-45px;">
-        <tr>
-          <td>
-           <div style="margin-top:20px;">
-            <%= f.error_notification %>
-            <%= display_base_errors resource %>
-             <%= f.input :email, input_html: { class: 'devics' }, :autofocus => true %>
-             <%= f.input :password %>
-             <%= f.button :submit, "Sign in", :class => 'btn-primary btn-success' %> 
-           </div>
-         </td>
+  <div class="span6 offset5">
+    <div style="width:500px;border-radius:5px;border:1px solid #ddd;box-shadow: 1px 1px 2px 1px;">
+      <h3 id="myModalLabel" align="center">Login </h3>
+      <div class="modal-body">
+        <%= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => 'form-vertical' }) do |f| %>
+        <table style="margin-left:-45px;">
+          <tr>
+            <td>
+             <div style="margin-top:20px;">
+              <%= f.error_notification %>
+              <%= display_base_errors resource %>
+              <%= f.input :email, input_html: { class: 'devics' }, :autofocus => true %>
+              <%= f.input :password %>
+              <%= f.button :submit, "Sign in", :class => 'btn-primary btn-success' %> 
+            </div>
+          </td>
 
 
-         <td style="float:left;width:auto;background-repeat:no-repeat;background-image:url('../assets/verticle_line.jpg');background-position: center;background-size: 2px 100%;">
+          <td style="float:left;width:auto;background-repeat:no-repeat;background-image:url('../assets/verticle_line.jpg');background-position: center;background-size: 2px 100%;">
            <div style="margin: 90px 35px;"> <%= image_tag("or.png", :size => "50x50", :alt => "") %> </div>
          </td>
 
@@ -28,11 +28,11 @@
 
           <div style="margin-left:10px;margin-top:5px;">
 
-           <%= link_to image_tag("loginfacebook.png",:class => "login_img", alt: ""), '/auth/facebook/' %>
+           <%= link_to image_tag("loginfacebook.png",:class => "login_img", alt: ""), user_omniauth_authorize_path(:facebook) %>
            <br>
            Facebook
            <br><br>
-           <%= link_to image_tag("Google_Logo.jpg", :class => "login_img", alt: ""), '/auth/google_oauth2/' %>
+           <%= link_to image_tag("Google_Logo.jpg", :class => "login_img", alt: ""), user_omniauth_authorize_path(:google_oauth2) %>
            <br>
            Google
            <br><br>
@@ -48,6 +48,6 @@
  
 </div>
 
-  </div>
+</div>
 </div>
 
