@@ -36,7 +36,7 @@ class Course < ActiveRecord::Base
   has_one  :rating_cache
   belongs_to :user
   letsrate_rateable "rate"
-
+  
   
   has_many :course_pricings
 
@@ -54,7 +54,10 @@ class Course < ActiveRecord::Base
 
   default_scope order: 'courses.created_at DESC'
 
+def self.enrollcourse(studentid,courseid)
+@enroll=Course.connection.select_all("select count(*) as co from student_courses where  student_id=#{studentid} and course_id= #{courseid}")
 
+end
   def attachment=(incoming_file)
     self.image = incoming_file.original_filename
     self.content_type = incoming_file.content_type

@@ -58,7 +58,12 @@ class CoursesController < ApplicationController
 	def show
 		@course = Course.find(params[:id])
 
+@enroll = StudentCourse.where('student_id=? and course_id=?',1,@course.id).count
 		
+
+		log=Logger.new("./test.Logger")
+		log.debug @student
+
 		@modules=lms_get_modules(@course)
 		#@countCommentsPerPage = 6
 		@comments = @course.comments.paginate(page: params[:page], per_page: 6)

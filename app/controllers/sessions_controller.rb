@@ -10,7 +10,7 @@ class SessionsController < Devise::SessionsController
     #sign_in(resource_name, resource)
 
 
-    super
+    #super
 
     #call cas sign to create the cas ticket
     begin
