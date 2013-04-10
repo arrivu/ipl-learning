@@ -26,7 +26,7 @@ class User < ActiveRecord::Base
   # :token_authenticatable , :lockable, :timeoutable and :omniauthable, :confirmable
   devise :database_authenticatable, :registerable,
   :recoverable, :rememberable, :trackable, :validatable, :confirmable
-  devise :omniauthable, :omniauth_providers => [:facebook,:google_oauth2]
+  devise :omniauthable, :omniauth_providers => [:facebook,:google_oauth2,:linkedin]
   # Setup accessible (or protected) attributes for your model
   attr_accessible :role_ids,:is_active, :as => :admin
   attr_accessible :attachment,:content_type,:image_blob,:lms_id,:name,
@@ -116,6 +116,20 @@ class User < ActiveRecord::Base
     data = access_token.info
     user = User.where(:email => data["email"]).first
 
+    unless user
+      user = User.create(name: data["name"],
+       email: data["email"],
+       password: Devise.friendly_token[0,20],
+       confirmed_at:Time.now
+       )
+    end
+    user.skip_confirmation! 
+    user
+  end
+
+  def self.find_for_linkedin(access_token, signed_in_resource=nil)
+    data = access_token.info
+    user = User.where(:email => data["email"]).first
     unless user
       user = User.create(name: data["name"],
        email: data["email"],

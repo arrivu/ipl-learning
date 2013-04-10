@@ -15,13 +15,15 @@ class RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
    build_resource
-   if (request.subdomain != nil && !Account.find_by_sub_domain_name(request.subdomain))
+
+   if (request.subdomain != nil && Account.find_by_sub_domain_name(request.subdomain))
      @subdomain = Account.find_by_sub_domain_name!(request.subdomain)
      resource.ac_id =@subdomain.id
    end
    if resource.save
     if resource.active_for_authentication?
       set_flash_message :notice, :signed_up if is_navigational_format?
+
         # sign_up(resource_name, resource)
         respond_with resource, :location => after_sign_up_path_for(resource)
       else

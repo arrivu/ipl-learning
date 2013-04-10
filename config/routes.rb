@@ -44,9 +44,8 @@ match '/terms', :to => 'screens#terms'
   match '/subscribed_courses', :to => 'courses#subscribed_courses'
   match '/show_image', :to => 'courses#show_image' 
   match '/show_image', :to => 'topics#show_image' 
-  match '/show_image', :to => 'screens#show_image' 
-  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
-  devise_for :users, :controllers => {:registrations => "registrations", :sessions => "sessions"}
+  match '/show_image', :to => 'screens#show_image'
+ devise_for :users, :controllers => { :registrations => "registrations",:omniauth_callbacks => "users/omniauth_callbacks" ,:sessions => "sessions"} 
   devise_scope :user do
     get 'sign_in', :to => 'devise/sessions#new', :as => :new_user_session
     get 'sign_out', :to => 'devise/sessions#destroy', :as => :destroy_user_session
@@ -59,7 +58,7 @@ match '/terms', :to => 'screens#terms'
       post 'add_users'
     end
   end
-# match '/auth/:provider/callback' => 'authentication#create'
+ #match '/auth/:provider/callback' => 'authentication#create'
 resources :comments, :path_prefix => '/:commentable_type/:commentable_id'
 
 match '/my_courses', :to => 'courses#my_courses'  
