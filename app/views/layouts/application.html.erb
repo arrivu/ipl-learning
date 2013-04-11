@@ -2,7 +2,23 @@
 <html>
 <head>
   <title><%= full_title(yield(:title)) %></title>
-  <%= stylesheet_link_tag "application", media: "all" %>
+  <%= stylesheet_link_tag "#{@subdomain}/style.css", media: "screen" ,rel:"stylesheet"%>
+ <%= stylesheet_link_tag "bootstrap.css", media: "all" ,rel:"stylesheet"%>
+  <%= stylesheet_link_tag "accounts.css", media: "all" ,rel:"stylesheet"%>
+   <%= stylesheet_link_tag "codecoursebox.css", media: "all" ,rel:"stylesheet"%>
+    <%= stylesheet_link_tag "codeheader.css", media: "all" ,rel:"stylesheet"%>
+     <%= stylesheet_link_tag "contact.css", media: "all" ,rel:"stylesheet"%>
+      <%= stylesheet_link_tag "contacts.css", media: "all" ,rel:"stylesheet"%>
+       <%= stylesheet_link_tag "coursebox.css", media: "all" ,rel:"stylesheet"%>
+        <%= stylesheet_link_tag "courselib.css", media: "all" ,rel:"stylesheet"%>
+        <%= stylesheet_link_tag "courselibcategories.css", media: "all" ,rel:"stylesheet"%>
+        <%= stylesheet_link_tag "coursemetadata.css", media: "all" ,rel:"stylesheet"%>
+        <%= stylesheet_link_tag "footer.css", media: "all" ,rel:"stylesheet"%>
+        <%= stylesheet_link_tag "home.css", media: "all" ,rel:"stylesheet"%>
+        <%= stylesheet_link_tag "login.css", media: "all" ,rel:"stylesheet"%>
+        <%= stylesheet_link_tag "mycourses.css", media: "all" ,rel:"stylesheet"%>
+        <%= stylesheet_link_tag "myprofile.css", media: "all" ,rel:"stylesheet"%>
+        <%= stylesheet_link_tag "previews.css", media: "all" ,rel:"stylesheet"%>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
   <%= render 'layouts/shim' %>
@@ -12,7 +28,7 @@
 <body>
 
   <% if check_null(yield(:effectingHeader)) %>
-  <div style="margin-bottom:70px;">
+  <div >
     <%= render 'layouts/header' %>
 
   </div>

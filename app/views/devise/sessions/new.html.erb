@@ -2,9 +2,10 @@
 <div class="row">
   
   <div class="span6 offset5">
-    <div style="width:500px;border-radius:5px;border:1px solid #ddd;box-shadow: 1px 1px 2px 1px;">
+    <div style="width:400px;border-radius:5px;border:1px solid #ddd;box-shadow: 1px 1px 2px 1px;padding:70px;">
       <h3 id="myModalLabel" align="center">Login </h3>
-      <div class="modal-body">
+      <br/>
+      <div style="position:relative;padding:15px">
         <%= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => 'form-vertical' }) do |f| %>
         <table style="margin-left:-45px;">
           <tr>
@@ -20,10 +21,8 @@
 
 
           <td style="float:left;width:auto;background-repeat:no-repeat;background-image:url('../assets/verticle_line.jpg');background-position: center;background-size: 2px 100%;">
-           <div style="margin: 90px 35px;"> <%= image_tag("or.png", :size => "50x50", :alt => "") %> </div>
+           <div style="margin: 70px 20px;"> <%= image_tag("or.png", :size => "200x200", :alt => "") %> </div>
          </td>
-
-
          <td>
 
           <div style="margin-left:10px;margin-top:5px;">
