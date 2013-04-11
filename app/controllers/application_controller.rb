@@ -1,5 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
+   before_filter :load_subdomain
+  include UrlHelper
   include ActiveMerchant::Billing::Integrations::ActionViewHelper
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to root_path, :alert => exception.message
@@ -15,5 +17,12 @@ class ApplicationController < ActionController::Base
     new_comment_path(:commentable=>params[:course_id],:commentable_type=>"course")
   end    
 end
-
+def load_subdomain
+  if(request.subdomains[0] != nil)
+    @subdomain = self.request.subdomains[0] || 'local'
+    
+  else
+    @subdomain = "common"
+  end
+  end
 end

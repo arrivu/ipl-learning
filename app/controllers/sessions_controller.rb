@@ -9,7 +9,6 @@ class SessionsController < Devise::SessionsController
     #set_flash_message(:notice, :signed_in) if is_navigational_format?
     #sign_in(resource_name, resource)
 
-
     super
 
     #call cas sign to create the cas ticket

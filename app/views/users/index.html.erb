@@ -4,24 +4,18 @@
 <ul class="nav nav-pills .pull-left">
   <li class="active">
 <%= link_to "Users", users_path %>
-</li><li>
-<%= link_to "New Course Library", new_course_path %>
 </li>
-<li>
-<%= link_to "Manage Course Library", manage_courses_path %>
-</li>
-  <li >
- <%= link_to "New Category",new_topic_path %>
- </li>
-
-<li>
- <%= link_to "Manage Category", topics_path %>
-  </li>
- <li><%= link_to "New Preview",new_preview_path %></li>
- <li><%= link_to "Manage Preview",previews_path %></li>
  <li><%= link_to "New Account",new_account_path %></li>
  <li ><%= link_to "Manage Account",accounts_path %></li>
  </ul>
+ <%= form_tag "/users/", :method => 'get' do %>
+<div class="control-group" style="float:left;">
+      <label class="control-label" style="text-align:left; float:left; padding:0px 0px; 30px 0px">Account Name </label><div class="controls" style="float:left;  padding:0px 30px; 30px 0px" >
+<%= select_tag :search, options_from_collection_for_select(Account.all, "id", "ac_name") , {:prompt => 'ALL'} %></div>
+<div class="controls"  >
+<%= submit_tag "Search", :name => nil , :class => "btn btn-success" , style: "margin-left:125px;"%>
+</div></div>
+<% end %>
 <table class="table table-condensed table-hover">
   <thead>
     <tr>

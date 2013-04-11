@@ -5,7 +5,13 @@ class UsersController < ApplicationController
   
   def index
     authorize! :index, @user, :message => 'Not authorized as an administrator.'
-    @users = User.paginate(page: params[:page], :per_page => 15)
+    if(params[:search] != nil && params[:search] != "")
+    @users = User.where("ac_id=#{params[:search]}").paginate(page: params[:page], :per_page => 15)
+     else
+       @users = User.paginate(page: params[:page], :per_page => 15)
+     end
+    
+
   end
 
   def show

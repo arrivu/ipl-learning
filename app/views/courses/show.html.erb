@@ -18,9 +18,11 @@
           </div>
           <div class="container clearfix"></div>
           <div class="subsection">
+            <% if @enroll == 0%>
             <a href="<%= course_payment_course_path(@course)%>"><div class="enroll">
               enroll
             </div></a>
+            <% end %>
             <a href="#previewcourse"><div class="shortlist">
               Preview
             </div></a>
