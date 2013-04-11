@@ -25,7 +25,7 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :token_authenticatable , :lockable, :timeoutable and :omniauthable, :confirmable
   devise :database_authenticatable, :registerable,
-  :recoverable, :rememberable, :trackable, :validatable, :confirmable
+  :recoverable, :rememberable, :trackable, :validatable
   devise :omniauthable, :omniauth_providers => [:facebook,:google_oauth2,:linkedin]
   # Setup accessible (or protected) attributes for your model
   attr_accessible :role_ids,:is_active, :as => :admin
@@ -89,6 +89,7 @@ class User < ActiveRecord::Base
     super && is_active?
   end
   
+  #omniauth facebook with devise
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
     user = User.where(:provider => auth.provider, :uid => auth.uid).first
     unless user
@@ -96,6 +97,8 @@ class User < ActiveRecord::Base
        provider:auth.provider,
        uid:auth.uid,
        email:auth.info.email,
+       omni_image_url: auth.info.image,
+       phone: auth.info.phone,
        password:Devise.friendly_token[0,20],
        confirmed_at:Time.now
        )
@@ -111,7 +114,7 @@ class User < ActiveRecord::Base
       end
     end
   end
-
+  #omniauth google oauth with devise
   def self.find_for_google_oauth2(access_token, signed_in_resource=nil)
     data = access_token.info
     user = User.where(:email => data["email"]).first
@@ -119,6 +122,8 @@ class User < ActiveRecord::Base
     unless user
       user = User.create(name: data["name"],
        email: data["email"],
+       email:auth.info.email,
+       omni_image_url: auth.info.image,
        password: Devise.friendly_token[0,20],
        confirmed_at:Time.now
        )
@@ -127,12 +132,15 @@ class User < ActiveRecord::Base
     user
   end
 
+  #omniauth linkedin with devise
   def self.find_for_linkedin(access_token, signed_in_resource=nil)
     data = access_token.info
     user = User.where(:email => data["email"]).first
     unless user
       user = User.create(name: data["name"],
        email: data["email"],
+       email:auth.info.email,
+       omni_image_url: auth.info.image,
        password: Devise.friendly_token[0,20],
        confirmed_at:Time.now
        )
