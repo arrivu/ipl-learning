@@ -19,7 +19,7 @@ else
   users_path
       end
      
-   elsif  params[:course_id] == "0" ||  params[:course_id] == nil 
+   else 
 
     @subdomain = Account.find_by_sub_domain_name!(request.subdomain)
    
@@ -32,16 +32,7 @@ else
       new_user_session_path
     end
       
-  else
-     if (current_user.ac_id ==@subdomain.id)
-        @course = Course.find(params[:course_id])
-    new_comment_path(:commentable=>params[:course_id],:commentable_type=>"course") 
-    else
-      reset_session
-      cookies.delete :tgt
-      flash[:error] = "You are login with incorrect url"
-      new_user_session_path
-    end
+  
    
   end    
 end
