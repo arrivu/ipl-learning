@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
     if current_user.has_role? :admin 
      users_path
    elsif  params[:course_id] == "0" ||  params[:course_id] == nil 
-    root_path    
+    edit_user_registration_path    
   else
     @course = Course.find(params[:course_id])
     new_comment_path(:commentable=>params[:course_id],:commentable_type=>"course")

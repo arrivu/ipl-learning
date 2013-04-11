@@ -17,7 +17,9 @@ Role.create([
 	], :without_protection => true)
 puts 'SETTING UP DEFAULT USER LOGIN'
 user = User.new(:name => 'Administrator', :email => 'admin@admin.com', :password => 'Admin123$', :password_confirmation => 'Admin123$', :provider=>"admin", :is_active => 'true')
-user.skip_confirmation!
+if Rails.env.production?
+	user.skip_confirmation! 
+end
 user.save
 puts 'User created: ' << user.name
 

@@ -27,6 +27,9 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
   :recoverable, :rememberable, :trackable, :validatable
   devise :omniauthable, :omniauth_providers => [:facebook,:google_oauth2,:linkedin]
+  if Rails.env.production?
+    devise :confirmable
+  end
   # Setup accessible (or protected) attributes for your model
   attr_accessible :role_ids,:is_active, :as => :admin
   attr_accessible :attachment,:content_type,:image_blob,:lms_id,:name,
@@ -103,7 +106,10 @@ class User < ActiveRecord::Base
        confirmed_at:Time.now
        )
     end
-    user.skip_confirmation! 
+    if Rails.env.production?
+      user.skip_confirmation! 
+    end
+
     user
   end
 
@@ -128,7 +134,9 @@ class User < ActiveRecord::Base
        confirmed_at:Time.now
        )
     end
-    user.skip_confirmation! 
+    if Rails.env.production?
+      user.skip_confirmation! 
+    end
     user
   end
 
@@ -145,7 +153,9 @@ class User < ActiveRecord::Base
        confirmed_at:Time.now
        )
     end
-    user.skip_confirmation! 
+    if Rails.env.production?
+      user.skip_confirmation! 
+    end
     user
   end
 end
