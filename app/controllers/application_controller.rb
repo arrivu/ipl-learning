@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  before_filter :load_subdomain
+  before_filter :load_subdomain , :get_sub_domain
   include UrlHelper
   include ActiveMerchant::Billing::Integrations::ActionViewHelper
   rescue_from CanCan::AccessDenied do |exception|
@@ -22,7 +22,7 @@ class ApplicationController < ActionController::Base
   else
     @subdomain = Account.find_by_sub_domain_name!(request.subdomain)
     
-    if (current_user.ac_id ==@subdomain.id)
+    if (current_user.ac_id == @subdomain.id)
       edit_user_registration_path  
     else
       reset_session
@@ -32,6 +32,7 @@ class ApplicationController < ActionController::Base
     end 
   end    
 end
+
 def load_subdomain
   if(request.subdomains[0] != nil)
     @subdomain = self.request.subdomains[0] || 'local'
@@ -41,4 +42,9 @@ def load_subdomain
   end
 
 end
+
+def get_sub_domain
+  $sub_domain = request.subdomains[0] 
+end
+
 end
