@@ -41,26 +41,43 @@ class AuthenticationController < ApplicationController
 
   private
 
-      def login_and_redirect_user(user)
+  def login_and_redirect_user(user)
         #first sign-in to cas
         user_cas_sign_in(user)
         # sign-in the user in devise
-        sign_in_and_redirect(:user, user)
-      end
+        if (current_user.has_role? :admin)
+         if (request.subdomains[0] != "admin")
+          reset_session
+          cookies.delete :tgt
+          flash[:error] = "You cannot login admin from this domain"
+          
 
-      def user_cas_sign_in (user)
-        tgt = nil
-        begin
-          tgt = cas_sign_in(user)  if cas_enable?
+        else
+          sign_in_and_redirect(:user, user)
+        end
+      end
+    end
+
+    def user_cas_sign_in (user)
+      tgt = nil
+      begin
+        tgt = cas_sign_in(user)  if cas_enable?
           # Sets a cookie that expires in 1 hour.
           #cookies[:tgt] = { :value => "#{tgt}", :expires => 1.hour.from_now }
           cookies[:tgt] = tgt
-        rescue Exception => e
-          puts e.inspect
-          puts "There is some error to sing_in to cas using user : #{user.inspect}"
-          raise
+          if (current_user.has_role? :admin)
+           if (request.subdomains[0] != "admin")
+            reset_session
+            cookies.delete :tgt
+            flash[:error] = "You cannot login admin from this domain"
+          end
         end
+      rescue Exception => e
+        puts e.inspect
+        puts "There is some error to sing_in to cas using user : #{user.inspect}"
+        raise
       end
+    end
 
-end
+  end
 
