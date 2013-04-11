@@ -29,7 +29,7 @@ end
 authenticated :user do
   root :to => 'screens#home'
 end
-root :to => 'screens#home'
+
 match '/about', :to => 'screens#about'
 match '/privacy', :to => 'screens#privacy'
 match '/terms', :to => 'screens#terms'
@@ -51,6 +51,7 @@ match '/terms', :to => 'screens#terms'
     get 'sign_out', :to => 'devise/sessions#destroy', :as => :destroy_user_session
     get '/users/auth/:provider' => 'users/omniauth_callbacks#passthru'
     match '/user_image', :to => 'registrations#user_image' 
+    root :to => 'devise/sessions#new', :as => :new_user_session
   end
 
   resources :users do

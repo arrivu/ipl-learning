@@ -13,15 +13,24 @@ class SessionsController < Devise::SessionsController
 
     #call cas sign to create the cas ticket
     begin
+
       tgt = nil
       tgt = cas_sign_in(current_user) if  cas_enable?
       cookies[:tgt] = tgt if tgt
+      if (current_user.has_role? :admin)
+       if (request.subdomains[0] != "admin")
+        reset_session
+        cookies.delete :tgt
+        flash[:info] = "You cannot login admin from this domain"
+        
 
-    rescue  Exception => e
-      puts e.inspect
-      puts "There is some error to sing_in to cas using user : #{current_user.inspect}"
-      raise
+      end
     end
+  rescue  Exception => e
+    puts e.inspect
+    puts "There is some error to sing_in to cas using user : #{current_user.inspect}"
+    raise
+  end
 
     #respond_with resource, :location => after_sign_in_path_for(resource)
     #self.class.superclass.instance_method(:foo).bind(self).call
