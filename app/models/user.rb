@@ -96,7 +96,7 @@ class User < ActiveRecord::Base
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
     user = User.where(:provider => auth.provider, :uid => auth.uid).first
     unless user
-      user = User.create(name:auth.extra.raw_info.name,
+      user = User.new(name:auth.extra.raw_info.name,
        provider:auth.provider,
        uid:auth.uid,
        email:auth.info.email,
@@ -105,6 +105,9 @@ class User < ActiveRecord::Base
        password:Devise.friendly_token[0,20],
        confirmed_at:Time.now
        )
+
+          user.ac_id=$account.id unless $account.id == nil
+      user.save
     end
     if Rails.env.production?
       user.skip_confirmation! 
@@ -126,13 +129,15 @@ class User < ActiveRecord::Base
     user = User.where(:email => data["email"]).first
 
     unless user
-      user = User.create(name: data["name"],
+      user = User.new(name: data["name"],
        email: data["email"],
        email:auth.info.email,
        omni_image_url: auth.info.image,
        password: Devise.friendly_token[0,20],
        confirmed_at:Time.now
        )
+       user.ac_id=$account.id unless $account.id == nil
+      user.save
     end
     if Rails.env.production?
       user.skip_confirmation! 
@@ -145,13 +150,15 @@ class User < ActiveRecord::Base
     data = access_token.info
     user = User.where(:email => data["email"]).first
     unless user
-      user = User.create(name: data["name"],
+      user = User.new(name: data["name"],
        email: data["email"],
        email:auth.info.email,
        omni_image_url: auth.info.image,
        password: Devise.friendly_token[0,20],
        confirmed_at:Time.now
        )
+        user.ac_id=$account.id unless $account.id == nil
+      user.save
     end
     if Rails.env.production?
       user.skip_confirmation! 
