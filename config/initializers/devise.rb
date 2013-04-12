@@ -266,12 +266,12 @@ Devise.setup do |config|
   #end
   require "omniauth-facebook"
   #if $sub_domain == "productleadership"
-    config.omniauth :facebook, "144245632421780", "a54401a275b98b3010a64f5781e2108e", { access_type: "offline", approval_prompt: "" }
+  config.omniauth :facebook, "144245632421780", "a54401a275b98b3010a64f5781e2108e", { access_type: "offline", approval_prompt: "" }
   #end
   # require "omniauth-facebook"
   # config.omniauth :facebook, "586163688080266", "093ab151dc5385a434b0e03815ac851f", { access_type: "offline", approval_prompt: "" }
   require "omniauth-google-oauth2"
-  config.omniauth :google_oauth2, "1024217888502.apps.googleusercontent.com", "2vgDbzzwpqB45yO1NBvxB45t", { access_type: "offline", approval_prompt: "" }
+  config.omniauth :google_oauth2, "1024217888502-3arjndm21fpg79vm6d7tbjk8vun75it3.apps.googleusercontent.com", "t26RQx0mcvgo-AN6AYr2XEzE", { access_type: "offline", approval_prompt: "" }
   require "omniauth-linkedin"
-  config.omniauth :linkedin, "31azcdigi8tt", "OKd1hmuJoNOg9J2g", { access_type: "offline", approval_prompt: "" }
+  config.omniauth :linkedin, "w174w7daqj8r", "I7aI67QH5dYmDxUz", { access_type: "offline", approval_prompt: "" }
 end

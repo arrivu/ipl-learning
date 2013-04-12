@@ -131,8 +131,7 @@ class User < ActiveRecord::Base
     unless user
       user = User.new(name: data["name"],
        email: data["email"],
-       email:auth.info.email,
-       omni_image_url: auth.info.image,
+       omni_image_url: data["image"],
        password: Devise.friendly_token[0,20],
        confirmed_at:Time.now
        )
@@ -152,8 +151,7 @@ class User < ActiveRecord::Base
     unless user
       user = User.new(name: data["name"],
        email: data["email"],
-       email:auth.info.email,
-       omni_image_url: auth.info.image,
+       omni_image_url: data["image"],
        password: Devise.friendly_token[0,20],
        confirmed_at:Time.now
        )
