@@ -10,20 +10,19 @@ class ApplicationController < ActionController::Base
   def after_sign_in_path_for(resource_or_scope)
     if current_user.has_role? :admin 
      if (request.subdomains[0] != "admin")
-      reset_session
-      cookies.delete :tgt
-      flash[:error] = "You cannot login admin from this domain"
-      new_user_session_path
+     users_path(:subdomain => admin)
     else
 
       users_path
     end
     
   else
-    @subdomain = Account.find_by_sub_domain_name!(request.subdomain)
-    
+    @subdomain = Account.find_by_id(current_user.ac_id)
+
     if (current_user.ac_id == @subdomain.id)
-      edit_user_registration_path  
+     # redirect_to("http://test.lvh.me:3000/")
+      # root_path(:subdomain =>( @subdomain.sub_domain_name)) 
+      edit_user_registration_url(:subdomain => @subdomain.sub_domain_name)
     else
       reset_session
       cookies.delete :tgt
