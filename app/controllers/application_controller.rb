@@ -27,7 +27,7 @@ class ApplicationController < ActionController::Base
     @subdomain = Account.find_by_sub_domain_name(request.subdomains[0])
 
     if (current_user.ac_id ==@subdomain.id)
-     root_path 
+     edit_user_registration_path 
    else
     reset_session
     cookies.delete :tgt
