@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
+
   before_filter :load_subdomain
+
   include UrlHelper
   include ActiveMerchant::Billing::Integrations::ActionViewHelper
   rescue_from CanCan::AccessDenied do |exception|
@@ -14,6 +16,7 @@ class ApplicationController < ActionController::Base
       cookies.delete :tgt
       flash[:error] = "You cannot login admin from this domain"
       new_user_session_path
+
     else
 
       users_path
@@ -35,14 +38,17 @@ class ApplicationController < ActionController::Base
   
 
 end    
+
 end
+
 def load_subdomain
   if(request.subdomains[0] != nil)
     @subdomain = self.request.subdomains[0] || 'local'
-    
+    $account = Account.find_by_sub_domain_name(request.subdomains[0])
   else
     @subdomain = "common"
   end
 
 end
+
 end

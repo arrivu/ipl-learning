@@ -95,7 +95,9 @@ users_hash = {
 				user_type: array[3],
 				sub_plan: array[4],
 				user_desc: array[5])
-			user.skip_confirmation!
+			if Rails.env.production?
+				user.skip_confirmation! 
+			end
 			user.save
 		end
 

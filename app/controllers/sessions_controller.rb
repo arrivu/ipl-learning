@@ -21,7 +21,7 @@ class SessionsController < Devise::SessionsController
        if (request.subdomains[0] != "admin")
         reset_session
         cookies.delete :tgt
-        flash[:info] = "You cannot login admin from this domain"
+        flash[:info] = "Admin cannot login to this domain"
         
 
       end
