@@ -16,8 +16,7 @@ class RegistrationsController < Devise::RegistrationsController
   def create
    build_resource
 
-   if (request.subdomain != nil && Account.find_by_sub_domain_name(request.subdomains[0]))
-     @subdomain = Account.find_by_sub_domain_name(request.subdomain[0])
+   if (request.subdomain != nil &&  @subdomain = Account.find_by_sub_domain_name(request.subdomain[0]))
      resource.ac_id =@subdomain.id
    end
    if resource.save

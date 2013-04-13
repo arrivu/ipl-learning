@@ -6,33 +6,33 @@ class UsersController < ApplicationController
   def index
     authorize! :index, @user, :message => 'Not authorized as an administrator.'
     if(params[:search] != nil && params[:search] != "")
-    @users = User.where("ac_id=#{params[:search]}").paginate(page: params[:page], :per_page => 15)
-     else
-       @users = User.paginate(page: params[:page], :per_page => 15)
-     end
-    
+      @users = User.where("ac_id=#{params[:search]}").paginate(page: params[:page], :per_page => 15)
+    else
+     @users = User.paginate(page: params[:page], :per_page => 15)
+   end
+   
 
-  end
+ end
 
-  def show
-    @user = User.find(params[:id])
-  end
-  
-  def update
-    authorize! :update, @user, :message => 'Not authorized as an administrator.'
-    @user = User.find(params[:id])
+ def show
+  @user = User.find(params[:id])
+end
+
+def update
+  authorize! :update, @user, :message => 'Not authorized as an administrator.'
+  @user = User.find(params[:id])
 
 
-    if @user.update_attributes(params[:user], :as => :admin)
-      if params[:user][:is_active] == "0"
-        redirect_to users_path, :notice => "User updated."
-      else
+  if @user.update_attributes(params[:user], :as => :admin)
+    if params[:user][:is_active] == "0"
+      redirect_to users_path, :notice => "User updated."
+    else
        # Tell the UserMailer to send a welcome Email after save
        begin
         UserEnableMailer.welcome_email(@user,"").deliver
-         flash[:info]= "User updated and activation mail sent !"
+        flash[:info]= "User updated and activation mail sent !"
 
-       rescue => e
+      rescue => e
         flash[:info] = "There is some error while sending the email .[ #{e.message}]"
 
       end
@@ -68,21 +68,21 @@ def add_users
       params[:user_emails].split(",").each do |email|
         random_string = ('0'..'z').to_a.shuffle.first(8).join
         @post = User.new(:email => email ,:password => random_string , :ac_id => params[:ac_id] , :is_active => 1 )
-        
+        if Rails.env.production?
           @post.skip_confirmation!
-
-          if @post.save
-
-            $error =nil
-          end
-          begin
-           UserEnableMailer.welcome_email(@post,random_string).deliver
-           flash[:info]= "User updated and activation mail sent !"
-
-         rescue => e
-          flash[:info] = "There is some error while sending the email .[ #{e.message}]"
-
         end
+        if @post.save
+
+          $error =nil
+        end
+        begin
+         UserEnableMailer.welcome_email(@post,random_string).deliver
+         flash[:info]= "User updated and activation mail sent !"
+
+       rescue => e
+        flash[:info] = "There is some error while sending the email .[ #{e.message}]"
+
+      end
       
 
     end        
@@ -98,20 +98,20 @@ def add_users
         random_string = ('0'..'z').to_a.shuffle.first(8).join
         @post =User.new(:email => email ,:password => random_string , :ac_id => acid , :is_active => 1)
         
-          @post.skip_confirmation!
+        @post.skip_confirmation!
 
-          if @post.save
+        if @post.save
 
-            $error =nil
-          end
-          begin
-           UserEnableMailer.welcome_email(@post,random_string).deliver
-           flash[:info]= "User updated and activation mail sent !"
-
-         rescue => e
-          flash[:info] = "There is some error while sending the email .[ #{e.message}]"
-
+          $error =nil
         end
+        begin
+         UserEnableMailer.welcome_email(@post,random_string).deliver
+         flash[:info]= "User updated and activation mail sent !"
+
+       rescue => e
+        flash[:info] = "There is some error while sending the email .[ #{e.message}]"
+
+      end
       
     end
   when ".txt" then
@@ -123,21 +123,21 @@ def add_users
     random_string = ('0'..'z').to_a.shuffle.first(8).join
     @post =User.new(:email => email ,:password => random_string, :ac_id => acid , :is_active => 1)
     
-      @post.skip_confirmation!
+    @post.skip_confirmation!
 
-      if @post.save
+    if @post.save
 
-        $error =nil
-      end
-      begin
-       UserEnableMailer.welcome_email(@post,random_string).deliver
-       flash[:info]= "User updated and activation mail sent !"
-
-     rescue => e
-      flash[:info] = "There is some error while sending the email .[ #{e.message}]"
-
+      $error =nil
     end
- 
+    begin
+     UserEnableMailer.welcome_email(@post,random_string).deliver
+     flash[:info]= "User updated and activation mail sent !"
+
+   rescue => e
+    flash[:info] = "There is some error while sending the email .[ #{e.message}]"
+
+  end
+  
 end
 when ".xls" || "xlsx" then
   Spreadsheet.client_encoding = 'UTF-8'
@@ -148,21 +148,21 @@ when ".xls" || "xlsx" then
     random_string = ('0'..'z').to_a.shuffle.first(8).join
     @post =User.new(:email => email ,:password => random_string , :ac_id => acid , :is_active => 1)
     
-      @post.skip_confirmation!
+    @post.skip_confirmation!
 
-      if @post.save
+    if @post.save
 
-        $error =nil
-      end
-      begin
-       UserEnableMailer.welcome_email(@post,random_string).deliver
-       flash[:info]= "User updated and activation mail sent !"
-
-     rescue => e
-      flash[:info] = "There is some error while sending the email .[ #{e.message}]"
-
+      $error =nil
     end
- 
+    begin
+     UserEnableMailer.welcome_email(@post,random_string).deliver
+     flash[:info]= "User updated and activation mail sent !"
+
+   rescue => e
+    flash[:info] = "There is some error while sending the email .[ #{e.message}]"
+
+  end
+  
 end
 else raise "Unknown file type: #{file.original_filename}"
 end
